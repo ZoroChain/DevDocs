@@ -53,6 +53,14 @@
     * TPS:186    
   * 带宽占用:>10Mbps
 
+* 带宽上限10mb/s，并发数:500/s，交易总量:5w，MaxTxnPerBlock：500，共识节点:Zoro6~Zoro9
+  * 用Zoro10发起交易，测试1: 
+    * 总共耗时:233秒
+    * TPS:214
+  * 用Zoro10发起交易，测试1: 
+    * 总共耗时:224秒
+    * TPS:223    
+
 ### NativeNEP5交易
 * 带宽上限10mb/s，并发数:500/s，交易总量:5w，MaxTxnPerBlock：500，共识节点:Zoro1~Zoro4
   * 测试1: 
@@ -68,3 +76,8 @@
     * 总共耗时:279秒
     * TPS:179
   * 带宽占用:>10Mbps
+
+* 带宽上限10mb/s，并发数:500/s，交易总量:5w，MaxTxnPerBlock：500，共识节点:Zoro6~Zoro9
+  * 用Zoro10发起交易
+    * 总共耗时:125秒
+    * TPS:400
