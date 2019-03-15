@@ -113,5 +113,33 @@ type blockCommitMsg struct {
 * 调用`calcParticipantPeers`和`calcParticipant`进行基于PosTable的VRF抽签算法
 * 结果保存在`currentParticipantConfig`变量中
 * 在每一轮新的共识开始时执行一次
+### `calcParticipant`
+* 基于Pof的Vrf抽签算法
+* 通过Vrf和Pos数组，计算得出对应的节点编号
+```
+func calcParticipant(vrf vconfig.VRFValue, dposTable []uint32, k uint32) uint32 {
+	var v1, v2 uint32
+	bIdx := k / 8
+	bits1 := k % 8
+	bits2 := 8 + bits1 // L - 8 + bits1
+	if k >= 512 {
+		return math.MaxUint32
+	}
+	// FIXME:
+	// take 16bits random variable from vrf, if len(dposTable) is not power of 2,
+	// this algorithm will break the fairness of vrf. to be fixed
+	v1 = uint32(vrf[bIdx]) >> bits1
+	if bIdx+1 < uint32(len(vrf)) {
+		v2 = uint32(vrf[bIdx+1])
+	} else {
+		v2 = uint32(vrf[0])
+	}
+
+	v2 = v2 & ((1 << bits2) - 1)
+	v := (v2 << (8 - bits1)) + v1
+	v = v % uint32(len(dposTable))
+	return dposTable[v]
+}
+```
 ### `startNewRound`
 * 开始新一轮的共识流程
