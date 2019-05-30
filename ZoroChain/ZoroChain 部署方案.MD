@@ -1,5 +1,6 @@
-# 共识节点部署
-## 准备工作
+# ZoroChain 部署方案 
+##  共识节点部署
+### 准备工作
 部署一套 ZoroChain 至少需要四个节点用作共识，这里使用四台 CentOS 服务器作为四个节点。每台服务器需要安装运行的依赖环境，如下：
 
 * 安装 dotnet core：
@@ -13,7 +14,7 @@
 
 使用 Zoro-Cli 创建四个钱包文件，记录钱包公钥。
 
-## 运行 Zoro-Cli
+### 运行 Zoro-Cli
 * 分别 clone 编译好的 Zoro-Cli 文件到四台服务器，git clone https://github.com/ZoroChain/Zoro-Publish.git，
 或者直接下载发布好的压缩包 https://github.com/ZoroChain/Zoro-Publish/releases ，解压即可。
 
@@ -91,13 +92,13 @@
 * 开启共识：在每个节点运行窗口中使用 start sonsensus 命令开启共识，开启成功后可以看到每个节点的高度开始变化。
 
 
-# 具有 RPC 功能的普通节点部署
+## 具有 RPC 功能的普通节点部署
 ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插件机制实现，在需要该功能时添加相应的插件即可。发布的共识节点文件中已包含 SimplePolicy 插件。
 
-## 环境准备
+### 环境准备
 准备一台和共识节点同样的环境，安装相应的依赖包。
 
-## 准备 Zoro-Cli
+### 准备 Zoro-Cli
 * 下载 Zoro-Cli 文件： clone 编译好的 Zoro-Cli 文件到四台服务器，git clone https://github.com/ZoroChain/Zoro-Publish.git，
 或者直接下载发布好的压缩包 https://github.com/ZoroChain/Zoro-Publish/releases ，解压即可。
 * 修改配置文件，和部署共识节点时一样编辑 config.json 和 protocol.json 文件，注意这里将 config.json 的  "UnlockWallet" 下的 "IsActive" 设置为 false，因为非共识节点不需要开启钱包功能。
@@ -137,7 +138,7 @@ ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插
     ```
     * Port：RpcAgent 使用的端口，和 rpchost.json 中的 AgentPort 相同；
     * MaxConnections：最大连接数量，RpcAgent 可接收并发请求数量。
-## 开启 Zoro Rpc
+### 开启 Zoro Rpc
 准备好之前的准备工作后，就可以运行具有 Rpc 功能的 Zoro 节点了，首先启动节点：在 Zoro-Cli.dll 所在目录运行 dotnet Zoro-Cli.dll；然后运行 Zoro-RpcHost.dll，在 Zoro-Cli.dll 所在目录运行 dotnet Zoro-RpcHost.dll，启动后显示 RPC server {IP：20334} has connected，说明 RPC 功能启用成功，接下来用 Postman 请求该 Rpc 地址就可以和 Zoro 进行交互了。
 例如：
 请求 http://RpcIP地址:20334?jsonrpc=2.0&id=1&method=getblockcount&params=[''] ，响应结果为：
@@ -147,7 +148,7 @@ ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插
     "result": 173914
 }
 
-# 提取 BCP 和 BCT 代币
+## 提取 BCP 和 BCT 代币
 Zoro 链在启动时，在创世区块中会创建两种代币，BCP 和 BCT，其中 BCP 有总量限制，BCT 可以增发，两种代币的所有者为初始的四个共识节点，要提取代币必须要有四个共识节点钱包的多方签名。
 
 提取 BCP 使用 Transfer：
