@@ -1,6 +1,6 @@
 # 共识节点部署
 ## 准备工作
-部署一套 ZoroChain 至少需要四个节点用作共识，这里使用四台 CentOS 服务器作为四个节点。每台服务器需要安装运行环境，如下：
+部署一套 ZoroChain 至少需要四个节点用作共识，这里使用四台 CentOS 服务器作为四个节点。每台服务器需要安装运行的依赖环境，如下：
 
 * 安装 dotnet core：
     * sudo rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
@@ -76,12 +76,12 @@
     }
     ```
     * Paths: 区块数据保存路径，Chain_{0} 表示 Chain_Magic 数字。
-    * P2P:Port：P2P 广播端口。
-    * RPC:BindAddress：RPC 服务绑定的 IP。
-    * RPC：Port：RPC 服务使用的端口。
-    * UnlockWallet：IsActive：是否开启打开钱包功能，Zoro 共识节点需要打开钱包，节点启动时输入钱包密码，IsActive 为 true 时，节点启动后会开启一个 Http 服务，钱包文件以 Http Post 方式发送到节点。
-    * UnlockWallet：HttpAddress：打开钱包的 Http 服务地址。
-    * UnlockWallet：StartConsensus：是否开启共识，默认 false，因为开启共识需要先打开钱包，节点启动并打开钱包以后使用 start sonsensus 命令开启共识。
+    * P2P Port：P2P 广播端口。
+    * RPC BindAddress：RPC 服务绑定的 IP。
+    * RPC Port：RPC 服务使用的端口。
+    * UnlockWallet IsActive：是否开启打开钱包功能，Zoro 共识节点启动后需要打开钱包，IsActive 为 true 时，启动节点需输入钱包密码，节点启动后会开启一个 Http 服务，然后将钱包文件以 Http Post 方式发送到节点。
+    * UnlockWallet HttpAddress：打开钱包的 Http 服务地址。
+    * UnlockWallet StartConsensus：是否开启共识，默认 false，因为开启共识需要先打开钱包，节点启动并打开钱包以后使用 start sonsensus 命令开启共识。
 
 * 在四台服务器上分别启动 Zoro-Cli，进入 Zoro-Cli.dll 所在目录，使用 dotnet Zoro-Cli.dll 运行 Zoro-Cli，输入钱包密码。
 * 打开钱包：启动节点后，使用 Postman 发送钱包文件到节点，请求地址为：http://节点IP:20330/openwallet
@@ -92,7 +92,7 @@
 
 
 # 具有 RPC 功能的普通节点部署
-ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插件机制实现，在需要该功能时添加相应的插件即可。已发布的共识节点文件中已包含 SimplePolicy 插件。
+ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插件机制实现，在需要该功能时添加相应的插件即可。发布的共识节点文件中已包含 SimplePolicy 插件。
 
 ## 环境准备
 准备一台和共识节点同样的环境，安装相应的依赖包。
@@ -100,7 +100,7 @@ ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插
 ## 准备 Zoro-Cli
 * 下载 Zoro-Cli 文件： clone 编译好的 Zoro-Cli 文件到四台服务器，git clone https://github.com/ZoroChain/Zoro-Publish.git，
 或者直接下载发布好的压缩包 https://github.com/ZoroChain/Zoro-Publish/releases ，解压即可。
-* 修改配置文件，和部署共识节点时一样编辑 config.json 和 protocol.json 文件，注意将 config.json 的  "UnlockWallet" 下的 "IsActive" 设置为 false，因为非共识节点不需要钱包功能。
+* 修改配置文件，和部署共识节点时一样编辑 config.json 和 protocol.json 文件，注意这里将 config.json 的  "UnlockWallet" 下的 "IsActive" 设置为 false，因为非共识节点不需要开启钱包功能。
             
 * 下载 RpcAgent 和 ApplicationLogs 插件：下载 https://github.com/ZoroChain/Zoro-Plugins/releases/tag/Zoro-Plugins 下的 ApplicationLogs.zip 和 RpcAgent.zip，将解压后的文件放到 Zoro-Cli.dll 所在目录下的 Plugins 文件夹中。
 * Zoro-RpcHost.dll；Zoro-RpcHost.dll 是 Zoro 的 RPC 服务，和 RpcAgent 插件一起使用，Zoro-RpcHost.dll 包含在已发布的共识节点文件中，下载 Zoro-Cli 文件时会一起下载。
@@ -123,7 +123,7 @@ ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插
     * AgentPort：RPC Agent 使用的端口；
     * Port：Zoro-RpcHost 使用的端口；RPC Agent 会使用该端口和 Zoro 节点进行交互；
     * TimeoutSeconds：RPC 超时时间；
-    * MinThreadCount：线程池线城数量配置，默认 1000。
+    * MinThreadCount：线程池线程数量配置，默认 1000。
 
 * 编辑 RpcAgent 的 config.json，位置：Plugins\RpcAgent\config.json
     * config.json 的内容：
@@ -135,7 +135,7 @@ ZoroChain 将 RPC 服务和产生智能合约运行的 Notify 等功能采用插
         }
     }
     ```
-    * Port:RpcAgent使用的端口，和 rpchost.json 中的 AgentPort 相同；
+    * Port：RpcAgent 使用的端口，和 rpchost.json 中的 AgentPort 相同；
     * MaxConnections：最大连接数量，RpcAgent 可接收并发请求数量。
 ## 开启 Zoro Rpc
 准备好之前的准备工作后，就可以运行具有 Rpc 功能的 Zoro 节点了，首先启动节点：在 Zoro-Cli.dll 所在目录运行 dotnet Zoro-Cli.dll；然后运行 Zoro-RpcHost.dll，在 Zoro-Cli.dll 所在目录运行 dotnet Zoro-RpcHost.dll，启动后显示 RPC server {IP：20334} has connected，说明 RPC 功能启用成功，接下来用 Postman 请求该 Rpc 地址就可以和 Zoro 进行交互了。
