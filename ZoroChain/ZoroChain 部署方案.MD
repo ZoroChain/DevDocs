@@ -89,7 +89,7 @@
 ，请求方式：Post，发送数据：钱包 json 文件的内容，打开钱包 json 文件，复制内容到 Postman，打开钱包成功后会返回 Open wallet successfully。
 `在四个节点做同样操作，每个节点使用对应的钱包文件，和 protocol.json 中共识节点的公钥一一对应；`
 `清除钱包数据使用 http://节点IP:20330/closewallet `。
-* 开启共识：在每个节点运行窗口中使用 start sonsensus 命令开启共识，开启成功后可以看到每个节点的高度开始变化。
+* 开启共识：在每个节点运行窗口中使用 start consensus 命令开启共识，开启成功后可以看到每个节点的高度开始变化。
 
 
 ## 具有 RPC 功能的普通节点部署
