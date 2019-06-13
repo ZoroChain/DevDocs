@@ -14,22 +14,20 @@
 ### ZoroChain的全局资产
 * 全局资产是指Zoro链上的系统资产，在根链和所有应用链上都可使用的资产
 * 采用类似NEO和GAS的机制，在创世块中定义全局资产
-* 目前BCP和BCT是ZoroChain上的两种全局资产
+* 目前ZORO和BCT是ZoroChain上的两种全局资产
 
 ### ZoroChain的全局资产实现方案
 * 通过NativeNEP5来实现全局资产，不再使用NEO原有的Asset和Account
 * 在创世块中用交易来创建和分配全局资产，节点启动后，全局资产即已自动创建好了
 
-### ZoroChain的BCP资产
+### ZORO资产
 * 用来支付交易的手续费和矿工的奖励
-* 在根链和应用链的创世块中创建BCP，并分配到根链上最初的一组共识节点的多签账户
-* 应用链的创世块只创建BCP，不做分配处理，默认没有BCP余额
-* BCP可以通过跨链兑换机制在根链和应用链之间兑换
+* 在根链和应用链的创世块中创建ZORO，并分配到根链上最初的一组共识节点的多签账户
+* 应用链的创世块只创建ZORO，不做分配处理，默认没有ZORO余额
+* ZORO可以通过跨链兑换机制在根链和应用链之间兑换
 
 ### NativeNEP5和NEP5合约的差异
 * 通过不同的SysCall来创建和调用
   * NEP5合约通过“Zoro.Contract.Create”来创建，通过AppCall来调用
   * NativeNEP5通过"Zoro.NativeNEP5.Create"来创建，通过"Zoro.NativeNEP5.Call"来调用
 * 转账手续费不同
-  * NEP5合约转账手续费需要大约4.2个GAS
-  * NativeNEP5的转账手续费只需要1个GAS  
