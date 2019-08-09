@@ -82,7 +82,7 @@
     * RPC Port：RPC 服务使用的端口。
     * UnlockWallet IsActive：是否开启打开钱包功能，Zoro 共识节点启动后需要打开钱包，IsActive 为 true 时，启动节点需输入钱包密码，节点启动后会开启一个 Http 服务，然后将钱包文件以 Http Post 方式发送到节点。
     * UnlockWallet HttpAddress：打开钱包的 Http 服务地址。
-    * UnlockWallet StartConsensus：是否开启共识，默认 false，因为开启共识需要先打开钱包，节点启动并打开钱包以后使用 start sonsensus 命令开启共识。
+    * UnlockWallet StartConsensus：是否开启共识，默认 false，因为开启共识需要先打开钱包，节点启动并打开钱包以后使用 start consensus 命令开启共识。
 
 * 在四台服务器上分别启动 Zoro-Cli，进入 Zoro-Cli.dll 所在目录，使用 dotnet Zoro-Cli.dll 运行 Zoro-Cli，输入钱包密码。
 * 打开钱包：启动节点后，使用 Postman 发送钱包文件到节点，请求地址为：http://节点IP:20330/openwallet
