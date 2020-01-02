@@ -12,7 +12,10 @@
 
 配置完成环境之后记录四台服务器的 IP 地址和要使用的端口，P2P 广播默认端口为 20001，需要在防火墙开通该端口。
 
-使用 Zoro-Cli 创建四个钱包文件，记录钱包公钥。
+### 使用 Zoro-Cli 创建四个钱包文件，记录钱包公钥
+* clone 编译好的 Zoro-Cli 文件，git clone https://github.com/ZoroChain/Zoro-Publish.git；
+* 开启一个Zoro-Cli节点，在 Zoro-Cli 目录下使用 dotnet Zoro-Cli.dll 命令即可开启；
+* 开启后使用 create wallet xxx.json 命令创建钱包，根据提示输入密码即可。
 
 ### 运行 Zoro-Cli
 * 分别 clone 编译好的 Zoro-Cli 文件到四台服务器，git clone https://github.com/ZoroChain/Zoro-Publish.git，
