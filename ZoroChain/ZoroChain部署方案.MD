@@ -6,7 +6,7 @@
 * 安装 dotnet core：
     * sudo rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
     * sudo yum update
-    * sudo yum install dotnet-sdk-3.1
+    * sudo yum install dotnet-sdk-2.1
 * 安装 sqlite、leveldb、libunwind
     * yum install -y sqlite-devel leveldb-devel libunwind-devel
 
