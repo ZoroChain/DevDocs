@@ -15,7 +15,7 @@
 ### 使用 Zoro-Cli 创建四个钱包文件，记录钱包公钥
 * clone 编译好的 Zoro-Cli 文件，git clone https://github.com/ZoroChain/Zoro-Publish.git；
 * 开启一个Zoro-Cli节点，在 Zoro-Cli 目录下使用 dotnet Zoro-Cli.dll 命令即可开启；
-* 开启后使用 create wallet xxx.json 命令创建钱包，根据提示输入密码即可。
+* 开启后使用 create wallet xxx.json 命令创建钱包，xxx是钱包文件名称，根据提示输入密码即可。
 
 ### 运行 Zoro-Cli
 * 分别 clone 编译好的 Zoro-Cli 文件到四台服务器，git clone https://github.com/ZoroChain/Zoro-Publish.git，
